@@ -87,6 +87,12 @@ Test:
 
 - Max step reached.
 - Repeated equivalent tool call.
+- Same tool and args return same observation twice; loop must stop or change strategy.
+- Task success criteria satisfied; agent must finalize without another tool call.
+- Submit/done tool called; runtime must not re-enter tool-use phase.
+- Tool result status is `no_change`, `unauthorized`, or `fatal_error`; agent must not retry blindly.
+- Retrieval returns no new sources after query rewrite; agent must ask, answer with uncertainty, or stop.
+- Final answer already satisfies schema and postconditions; repair loop must not continue.
 - Repair budget exhausted.
 - Context compaction preserves authority and approvals.
 - Memory write is blocked for untrusted content.

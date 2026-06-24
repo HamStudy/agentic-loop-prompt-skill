@@ -25,6 +25,7 @@ Common split:
    - Write a new agent prompt.
    - Review or harden an existing prompt.
    - Diagnose a bad trace or recurring failure.
+   - Stop an agent from repeating the same action after the task is already complete.
    - Improve tool names, descriptions, schemas, or tool results.
    - Decide what tool information belongs in the main prompt versus structured tool definitions.
    - Add structured output or repair behavior.
@@ -86,7 +87,7 @@ Read only the detail pages needed for the task:
 - Tool availability or tool-use instructions are unclear: read `tool-interfaces.md`, then `prompt-contracts.md`.
 - Output is valid but not useful to the caller or downstream system: read `verification-and-consensus.md`, then `structured-outputs.md`.
 - Wrong tool selected: read `tool-interfaces.md`, then `loop-controls.md`.
-- Repeated loops or tool spam: read `loop-controls.md`.
+- Repeated loops, tool spam, or agent keeps working after success: read `loop-controls.md`, then `evals.md`.
 - Need extra confidence before committing or returning: read `verification-and-consensus.md`.
 - Need multiple models, judges, critics, debate, or consensus: read `verification-and-consensus.md`, then `model-adaptation.md`.
 - Unsafe send/delete/write/action: read `security-boundaries.md`, then `loop-controls.md`.
@@ -108,7 +109,7 @@ Read only the detail pages needed for the task:
 - Return compact structured tool results with typed status and provenance.
 - Enforce semantic validation, permissions, idempotency, and egress controls in code.
 - Add verifier or consensus passes when failure is costly, ambiguous, open-ended, or hard to validate deterministically.
-- Add stop conditions, cycle detection, and bounded repair attempts.
+- Add explicit done states, stop conditions, progress checks, cycle detection, and bounded repair attempts.
 - Add evals for normal success, ambiguity, malformed output, tool errors, injection, and high-risk actions.
 
 ## Avoid
