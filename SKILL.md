@@ -1,6 +1,6 @@
 ---
 name: improve-agentic-prompts
-description: Improve, review, harden, or redesign prompts for LLM applications that run agentic loops, including tool/function/MCP calling agents, Vercel AI SDK ToolLoopAgent-style loops, LangGraph/ReAct agents, browser or computer-use agents, code/shell agents, multi-agent systems, structured-output workflows, and agents with memory or RAG. Use when Codex needs to write or critique system/developer prompts, tool descriptions and schemas, output contracts, loop controls, injection defenses, approval boundaries, usability checks, verifier models, multi-model consensus, model/provider adaptations, or eval cases for reliable and safe agent behavior.
+description: Improve, review, harden, or redesign prompts for LLM applications that run agentic loops, including tool/function/MCP calling agents, Vercel AI SDK ToolLoopAgent-style loops, LangGraph/ReAct agents, browser or computer-use agents, code/shell agents, multi-agent systems, structured-output workflows, reasoning/thinking traces, and agents with memory or RAG. Use when Codex needs to write or critique system/developer prompts, tool descriptions and schemas, output contracts, loop controls, reasoning visibility, injection defenses, approval boundaries, usability checks, verifier models, multi-model consensus, model/provider adaptations, or eval cases for reliable and safe agent behavior.
 ---
 
 # Improve Agentic Prompts
@@ -17,6 +17,7 @@ Common split:
 - **Tool/interface:** names, descriptions, schemas, typed errors, provenance, result shape.
 - **Runtime:** authorization, validation, egress controls, idempotency, step budget, cycle detection, approvals, memory writes, logging.
 - **Verification:** postconditions, downstream-consumer checks, independent judges, cross-model consensus, human review triggers.
+- **Reasoning visibility:** provider-specific reasoning summaries, thinking blocks, trace logs, retention policy, and user-facing explanations.
 - **Evals:** traces and adversarial cases that prove the prompt plus runtime behaves correctly.
 
 ## Workflow
@@ -31,6 +32,7 @@ Common split:
    - Add structured output or repair behavior.
    - Add result usability checks, postcondition checks, or verifier passes.
    - Combine multiple models, judges, critics, or consensus mechanisms.
+   - Decide whether reasoning/thinking traces should be requested, shown, logged, preserved, summarized, or excluded from context.
    - Add injection, approval, or least-privilege defenses.
    - Adapt a prompt to a different model, provider, or framework.
    - Design evals for an agent loop.
@@ -46,6 +48,7 @@ Common split:
    - Output contract and the system that consumes it.
    - Usability criteria: what must parse, render, execute, satisfy, or be accepted downstream.
    - Existing verification: tests, validators, judges, reviewers, consensus, human approval, or production monitors.
+   - Reasoning visibility: hidden reasoning, exposed summaries, thinking blocks, scratchpads, debug logs, retention, and redaction rules.
    - Failure traces, malformed outputs, rejected tool calls, unsafe behavior, or model-specific symptoms.
 
 3. Fetch current framework/provider docs when API behavior matters. Use current docs for SDK syntax, tool-calling modes, structured output settings, or framework-specific loop controls.
@@ -56,6 +59,7 @@ Common split:
    - Tighten structured outputs and repair behavior.
    - Tighten loop/state-machine controls.
    - Add postcondition, usability, verifier, or consensus checks.
+   - Define reasoning trace visibility, storage, replay, and redaction.
    - Tighten security boundaries and approvals.
    - Tune for the model/provider class.
    - Add focused evals.
@@ -65,6 +69,7 @@ Common split:
    - Tool/schema/result changes.
    - Runtime controls that must be enforced outside the prompt.
    - Verification or consensus plan, including escalation behavior when checks disagree.
+   - Reasoning/trace handling plan, including what is shown to users and what stays internal.
    - Eval cases and acceptance criteria.
    - Assumptions, residual risk, and any current-doc caveats.
 
@@ -77,6 +82,7 @@ Read only the detail pages needed for the task:
 - `references/structured-outputs.md`: final output schemas, tool calls versus final answers, constrained output, parser repair, and semantic validation.
 - `references/loop-controls.md`: state-machine design, active tools, tool choice, prepare-step behavior, stop conditions, cycle detection, context, memory, approvals, and idempotency.
 - `references/verification-and-consensus.md`: usable-result checks, postconditions, verifier models, critics, self-consistency, debate, model juries, consensus routing, and escalation.
+- `references/reasoning-traces.md`: hidden reasoning versus visible summaries, provider thinking blocks, scratchpads, trace logging, context retention, redaction, and UI exposure.
 - `references/security-boundaries.md`: direct/indirect prompt injection, excessive agency, tool poisoning, memory poisoning, cross-agent risks, egress, secrets, MCP hardening, and approval boundaries.
 - `references/model-adaptation.md`: adjustments for frontier, reasoning, small, text-only, open/local, RAG, multimodal, code/shell, multi-agent, realtime/voice, and provider-specific tool behavior.
 - `references/evals.md`: functional tests, adversarial injection matrices, capability probes, metrics, regression practice, and trace-based iteration.
@@ -90,6 +96,7 @@ Read only the detail pages needed for the task:
 - Repeated loops, tool spam, or agent keeps working after success: read `loop-controls.md`, then `evals.md`.
 - Need extra confidence before committing or returning: read `verification-and-consensus.md`.
 - Need multiple models, judges, critics, debate, or consensus: read `verification-and-consensus.md`, then `model-adaptation.md`.
+- Need to see, log, preserve, or hide reasoning/thinking text: read `reasoning-traces.md`, then `model-adaptation.md`.
 - Unsafe send/delete/write/action: read `security-boundaries.md`, then `loop-controls.md`.
 - User or webpage can override policy: read `security-boundaries.md` and `prompt-contracts.md`.
 - Works on one model but fails on another: read `model-adaptation.md`.
@@ -110,6 +117,7 @@ Read only the detail pages needed for the task:
 - Enforce semantic validation, permissions, idempotency, and egress controls in code.
 - Add verifier or consensus passes when failure is costly, ambiguous, open-ended, or hard to validate deterministically.
 - Add explicit done states, stop conditions, progress checks, cycle detection, and bounded repair attempts.
+- Decide whether reasoning traces are needed; prefer safe summaries and structured trace events over raw hidden reasoning.
 - Add evals for normal success, ambiguity, malformed output, tool errors, injection, and high-risk actions.
 
 ## Avoid
