@@ -1,4 +1,0 @@
-interface:
-  display_name: "Improve Agentic Prompts"
-  short_description: "Harden prompts for tool-using agents"
-  default_prompt: "Use $improve-agentic-prompts to review and improve this agent-loop prompt, tool design, and safety boundaries."
